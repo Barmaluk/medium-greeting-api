@@ -1,0 +1,31 @@
+<html> 
+	<head>
+	
+	</head>
+	
+	<body>
+
+        <form class="grid" action="/result" method="POST">
+
+            {% if name %}
+                <center>
+                <h3 style="color: rgb(0, 26, 255);" class="let_space">Hello {{name}}</h3>
+                </center> 
+            {% endif %}
+
+            <center>
+                <label for="name">Enter your name:</label>
+                <input type="text" id="name" name="name">
+            </center>
+
+            <br>
+            <br>
+            <br>
+
+            <center><input class="file_submit" type="Submit"></center>
+
+        </form>
+
+    </body>
+
+</html>

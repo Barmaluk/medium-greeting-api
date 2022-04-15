@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, url_for
 app = Flask(__name__)
 
 
@@ -9,7 +9,7 @@ def respond():
 
     # For debugging
     print(f"Received: {name}")
-
+     
     response = {}
 
     # Check if the user sent a name at all
@@ -35,7 +35,7 @@ def post_something():
             "Message": f"Welcome {name} to our awesome API!",
             # Add this option to distinct the POST request
             "METHOD": "POST"
-        })
+            })
     else:
         return jsonify({
             "ERROR": "No name found. Please send a name."
@@ -45,9 +45,16 @@ def post_something():
 @app.route('/')
 def index():
     # A welcome message to test our server
-    return "<h1>Welcome to our medium-greeting-api!</h1>"
+    return render_template("index.html")
 
+@app.route('/result', methods=['POST', 'GET'])
+def result():
+    output = request.form.to_dict()
+    print(output)
+    name = output["name"]
+
+    return render_template('index.html', name = name)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=5000, debug=True)
